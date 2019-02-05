@@ -4,10 +4,23 @@ import Main from './Components/Main';
 import './App.css';
 
 class App extends Component {
-  render() {
+
+  goTo(route) {
+    this.props.history.replace(`/${route}`);
+  }
+
+  login() {
+    this.props.auth.login();
+  }
+
+  logout() {
+    this.props.auth.logout();
+  }
+
+  render() {    
     return (
       <div>
-        <Header />
+        <Header auth={this.props.auth} />
         <Main />
       </div>
     );

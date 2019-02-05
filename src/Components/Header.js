@@ -1,6 +1,17 @@
 import React from 'react';
 
-const Header = () => {
+const Header = (props) => {
+
+    const { isAuthenticated } = props.auth;
+
+    const login = () => {
+        props.auth.login();
+    }
+
+    const logout = () => {
+        props.auth.logout();
+    }
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <a className="navbar-brand" href="index.html">PRANK</a>
@@ -17,11 +28,17 @@ const Header = () => {
                     </li>
                 </ul>
                 <ul className="navbar-nav">
-                    <li className="nav-item active">
-                        <a className="nav-link" href="login.html">Login</a>
-                    </li>
                     <li>
-                        <a className="btn btn-outline-primary my-2 my-sm-0" href="#">Cadastrar</a>
+                        {
+                            !isAuthenticated() && (
+                                <button type="button" onClick={login.bind(this)} className="btn btn-outline-primary my-2 my-sm-0" >Login</button>
+                            )
+                        }
+                        {
+                            isAuthenticated() && (
+                                <button type="button" onClick={logout.bind(this)} className="btn btn-outline-danger my-2 my-sm-0" >Logout</button>
+                            )
+                        }                    
                     </li>
                 </ul>
             </div>
