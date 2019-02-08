@@ -3,10 +3,10 @@ import ForumList from './ForumList';
 
 
 
-const Main = () =>  {
+const Main = (props) =>  {
     return (
         <main role="main">
-            <ForumList />
+            <ForumList auth={props.auth} />
         </main>
     );
 }

@@ -17,11 +17,19 @@ class App extends Component {
     this.props.auth.logout();
   }
 
+  componentDidMount() {
+    const { renewSession } = this.props.auth;
+
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+      renewSession();
+    }
+  }
+
   render() {    
     return (
       <div>
         <Header auth={this.props.auth} />
-        <Main />
+        <Main auth={this.props.auth} />
       </div>
     );
   }

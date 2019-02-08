@@ -17,51 +17,58 @@ const styles = {
 
 }
 
-const ForumList = () => {
+const ForumList = (props) => {
+
+    const { isAuthenticated } = props.auth;
+
     return (
         <div>
-            <div class="jumbotron">
-                <div class="container">
-                    <h1 class="display-4">O Fórum da Roomie</h1>
-                    <p class="lead">Bem-vindos ao pior lugar da internet.</p>
-                    <a class="btn btn-primary" href="#">Cadastre-se!</a>
+            <div className="jumbotron">
+                <div className="container">
+                    <h1 className="display-4">O Fórum da Roomie</h1>
+                    <p className="lead">Bem-vindos ao pior lugar da internet.</p>
+                    {
+                        !isAuthenticated() && (
+                            <a className="btn btn-primary" href="#">Cadastre-se!</a>
+                        )
+                    }                    
                 </div>		
             </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-header text-white bg-success d-flex">
+            <div className="container">
+                <div className="row">
+                    <div className="col">
+                        <div className="card">
+                            <div className="card-header text-white bg-success d-flex">
                                 <VideogameAssetIcon style={styles.largeIcon} />
-                                <h4 class="card-title mb-0">Joguinhos</h4>
+                                <h4 className="card-title mb-0">Joguinhos</h4>
                             </div>
-                            <div class="card-body">
-                                <p class="card-text lead">O lugar correto para discutir sobre seus joguinhos preferidos e brigar pra saber qual o melhor console.</p>							
-                                <p class="card-text text-muted">
+                            <div className="card-body">
+                                <p className="card-text lead">O lugar correto para discutir sobre seus joguinhos preferidos e brigar pra saber qual o melhor console.</p>							
+                                <p className="card-text text-muted">
                                     <ScheduleIcon style={styles.commonIcon} />
                                     Último Tópico: <a href="#">[Oficial] The Messenger</a>, por <a href="#">Bluw</a>
                                 </p>
                             </div>						
-                            <div class="card-footer">
-                                    <a class="btn btn-primary" href="joguinhos.html">Acessar</a>
+                            <div className="card-footer">
+                                    <a className="btn btn-primary" href="joguinhos.html">Acessar</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-header text-white bg-info d-flex">
+                    <div className="col">
+                        <div className="card">
+                            <div className="card-header text-white bg-info d-flex">
                                 <ChatBubbleOutlineIcon style={styles.largeIcon} />
-                                <h4 class="card-title mb-0">Geral</h4>
+                                <h4 className="card-title mb-0">Geral</h4>
                             </div>
-                            <div class="card-body">
-                                <p class="card-text lead">Para discutir tudo que não é relacionado a joguinhos, desde política a anime.</p>
-                                <p class="card-text text-muted">
+                            <div className="card-body">
+                                <p className="card-text lead">Para discutir tudo que não é relacionado a joguinhos, desde política a anime.</p>
+                                <p className="card-text text-muted">
                                     <ScheduleIcon style={styles.commonIcon} />
                                     Último Tópico: <a href="#">Levante do Maduro</a>, por <a href="#">Granja</a>
                                 </p>
                             </div>
-                            <div class="card-footer">
-                                    <a class="btn btn-primary" href="geral.html">Acessar</a>
+                            <div className="card-footer">
+                                    <a className="btn btn-primary" href="geral.html">Acessar</a>
                             </div>
                         </div>
                     </div>
