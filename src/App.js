@@ -4,9 +4,8 @@ import Main from './Components/Main';
 import './App.css';
 
 class App extends Component {
-
   goTo(route) {
-    this.props.history.replace(`/${route}`);
+    this.props.history.replace(`/${route}`)
   }
 
   login() {
