@@ -1,7 +1,8 @@
 import React from 'react';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
-import VideogameAssetIcon from '@material-ui/icons/VideogameAsset'
+import VideogameAssetIcon from '@material-ui/icons/VideogameAsset';
+import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 const styles = {
 
@@ -50,7 +51,7 @@ const ForumList = (props) => {
                                 </p>
                             </div>						
                             <div className="card-footer">
-                                    <a className="btn btn-primary" href="joguinhos.html">Acessar</a>
+                                    <Link to={`/ViewForum/1`} className="btn btn-primary">Acessar</Link>
                             </div>
                         </div>
                     </div>
