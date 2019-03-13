@@ -3,10 +3,7 @@ import Header from './Components/Header';
 import Main from './Components/Main';
 import './App.css';
 
-class App extends Component {
-  goTo(route) {
-    this.props.history.replace(`/${route}`)
-  }
+class App extends Component {  
 
   login() {
     this.props.auth.login();

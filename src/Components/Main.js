@@ -1,17 +1,15 @@
 import React from 'react';
 import ForumList from './ForumList';
-import ViewForum from './ViewForum';
-import { Router, Switch, Route } from 'react-router-dom';
+import ViewForum from './Board/ViewForum';
+import { Switch, Route } from 'react-router-dom';
 
-const Main = (props) =>  {
+const Main = () =>  {
     return (
         <main role="main">
-            <Router>
-                <Switch>
-                    <Route exact path="/" render={(props) => <ForumList auth={props.auth} />} />
-                    <Route path="/ViewForum/:id" Component={ViewForum} />
-                </Switch>
-            </Router>
+            <Switch>
+                <Route exact path="/" component={ForumList} />
+                <Route path="/ViewForum/:id" component={ViewForum} />
+            </Switch>
         </main>
     );
 }

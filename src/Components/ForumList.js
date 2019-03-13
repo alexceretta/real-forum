@@ -2,7 +2,7 @@ import React from 'react';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import VideogameAssetIcon from '@material-ui/icons/VideogameAsset';
-import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const styles = {
 
@@ -18,21 +18,14 @@ const styles = {
 
 }
 
-const ForumList = (props) => {
-
-    const { isAuthenticated } = props.auth;
+const ForumList = () => {
 
     return (
         <div>
             <div className="jumbotron">
                 <div className="container">
                     <h1 className="display-4">O Fórum da Roomie</h1>
-                    <p className="lead">Bem-vindos ao pior lugar da internet.</p>
-                    {
-                        !isAuthenticated() && (
-                            <a className="btn btn-primary" href="#">Cadastre-se!</a>
-                        )
-                    }                    
+                    <p className="lead">Bem-vindos ao pior lugar da internet.</p>                                      
                 </div>		
             </div>
             <div className="container">

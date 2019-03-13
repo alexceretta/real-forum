@@ -1,27 +1,31 @@
-import React, { Component } from 'react';
+import React from 'react';
 import loading from './loading.svg';
+import { withRouter } from 'react-router-dom'
 
-class Callback extends Component {
-  render() {
-    const style = {
-      position: 'absolute',
-      display: 'flex',
-      justifyContent: 'center',
-      height: '100vh',
-      width: '100vw',
-      top: 0,
-      bottom: 0,
-      left: 0,
-      right: 0,
-      backgroundColor: 'white',
-    }
+function Callback(props) {
 
-    return (
-      <div style={style}>
-        <img src={loading} alt="loading"/>
-      </div>
-    );
+  const style = {
+    position: 'absolute',
+    display: 'flex',
+    justifyContent: 'center',
+    height: '100vh',
+    width: '100vw',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'white',
   }
+
+  props.auth.handleAuthentication().then(() => {
+    props.history.push('/');
+  });
+
+  return (
+    <div style={style}>
+      <img src={loading} alt="loading"/>
+    </div>
+  );
 }
 
-export default Callback;
+export default withRouter(Callback);
