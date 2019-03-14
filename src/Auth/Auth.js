@@ -1,20 +1,19 @@
 import auth0 from 'auth0-js';
 import { AUTH_CONFIG } from './auth0-variables';
+//import { CssBaseline } from '@material-ui/core';
 
 export default class Auth {
-  accessToken;
-  idToken;
-  expiresAt;
-
-  auth0 = new auth0.WebAuth({
-    domain: AUTH_CONFIG.domain,
-    clientID: AUTH_CONFIG.clientId,
-    redirectUri: AUTH_CONFIG.callbackUrl,
-    responseType: 'token id_token',
-    scope: 'openid'
-  });
 
   constructor() {
+
+    this.auth0 = new auth0.WebAuth({
+      domain: AUTH_CONFIG.domain,
+      clientID: AUTH_CONFIG.clientId,
+      redirectUri: AUTH_CONFIG.callbackUrl,
+      responseType: 'token id_token',
+      scope: 'openid'
+    });
+
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
@@ -22,7 +21,9 @@ export default class Auth {
     this.getAccessToken = this.getAccessToken.bind(this);
     this.getIdToken = this.getIdToken.bind(this);
     this.renewSession = this.renewSession.bind(this);
-  }  
+    this.getProfile = this.getProfile.bind(this);
+    this.setSession = this.setSession.bind(this);
+  }
 
   login() {
     this.auth0.authorize();
@@ -59,16 +60,13 @@ export default class Auth {
     this.accessToken = authResult.accessToken;
     this.idToken = authResult.idToken;
     this.expiresAt = expiresAt;
-
-    // navigate to the home route
-    this.context.history.replace("/");
   }
 
-  renewSession() {
+  renewSession() {    
     this.auth0.checkSession({}, (err, authResult) => {
        if (authResult && authResult.accessToken && authResult.idToken) {
          this.setSession(authResult);
-       } else if (err) {
+       } else if (err) {         
          this.logout();
          console.log(err);
          alert(`Could not get a new token (${err.error}: ${err.error_description}).`);
@@ -81,6 +79,7 @@ export default class Auth {
     this.accessToken = null;
     this.idToken = null;
     this.expiresAt = 0;
+    this.userProfile = null;
 
     // Remove isLoggedIn flag from localStorage
     localStorage.removeItem('isLoggedIn');
@@ -92,7 +91,15 @@ export default class Auth {
   isAuthenticated() {
     // Check whether the current time is past the
     // access token's expiry time
-    let expiresAt = this.expiresAt;
-    return new Date().getTime() < expiresAt;
+    return new Date().getTime() < this.expiresAt;
+  }
+
+  getProfile(cb) {
+    this.auth0.client.userInfo(this.accessToken, (err, profile) => {
+      if(profile) {
+        this.userProfile = profile;
+      }
+      cb(err, profile);
+    });
   }
 }

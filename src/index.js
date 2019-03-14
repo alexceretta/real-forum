@@ -1,11 +1,18 @@
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import { makeMainRoutes } from './routes';
+import { Provider } from 'react-redux';
 
+import { makeMainRoutes } from './routes';
+import configureStore from './Redux/configureStore';
+
+const store = configureStore();
 const routes = makeMainRoutes();
 
 ReactDOM.render(
-  routes,
+  <Provider store={store}>
+    {routes}
+  </Provider>,  
   document.getElementById('root')
 );
