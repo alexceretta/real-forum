@@ -1,12 +1,11 @@
 import * as types from './types';
 
 export const loginRequest = () => ({
-  type: types.LOGIN_REQUEST
+  type: types.LOGIN_REQUEST,
 });
 
 export const loginSuccess = () => ({
   type: types.LOGIN_SUCCESS,
-  //payload: { profile }
 });
 
 export const loginError = error => ({
@@ -14,6 +13,10 @@ export const loginError = error => ({
   error
 });
 
+export const logoutRequest = () => ({
+  type: types.LOGOUT_REQUEST,
+})
+
 export const logoutSuccess = () => ({
-  type: types.LOGOUT_SUCCESS
+  type: types.LOGOUT_SUCCESS,
 });

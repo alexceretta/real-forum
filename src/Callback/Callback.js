@@ -1,8 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import loading from './loading.svg';
 import { withRouter } from 'react-router-dom'
 
-function Callback(props) {
+const Callback = (props) => {
 
   const style = {
     position: 'absolute',
@@ -17,8 +18,12 @@ function Callback(props) {
     backgroundColor: 'white',
   }
 
-  props.auth.handleAuthentication().then(() => {
-    props.history.push('/');
+  const { auth } = props;
+
+  auth.handleAuthentication().then(() => {
+    auth.getProfile().then(() => {
+      props.history.push('/');
+    })    
   });
 
   return (
@@ -28,4 +33,8 @@ function Callback(props) {
   );
 }
 
-export default withRouter(Callback);
+const mapStateToProps = (store) => ({
+  auth: store.authState.auth
+});
+
+export default withRouter(connect(mapStateToProps)(Callback));

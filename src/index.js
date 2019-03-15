@@ -1,18 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import 'bootstrap/dist/css/bootstrap.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import { makeMainRoutes } from './routes';
-import configureStore from './Redux/configureStore';
+import { Store } from './Store';
+import App from './Containers/App';
+import Callback from './Callback/Callback';
 
-const store = configureStore();
-const routes = makeMainRoutes();
+import './index.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 ReactDOM.render(
-  <Provider store={store}>
-    {routes}
+  <Provider store={Store}>
+    <Router>
+        <div>
+          <Route path="/" component={App} />
+          <Route exact path="/callback" component={Callback} />
+        </div>
+      </Router>
   </Provider>,  
   document.getElementById('root')
 );

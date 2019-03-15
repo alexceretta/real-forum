@@ -1,15 +1,15 @@
-import * as types from './types'
-import * as Auth from '../../../Auth/Auth'
+import * as types from '../Actions/types'
+import Auth from '../Auth/Auth'
 
-const authReducer = (
-    state = {
-        isAuthenticated: Auth.isAuthenticated(),
-        isFetching: false,
-        error: null
-    }, action
-) => {
-    switch(action.type) {
+const initState = {
+    auth: new Auth(),
+    isFetching: false
+}
+
+export const authReducer = (state = initState, action) => {
+    switch (action.type) {
         case types.LOGIN_REQUEST:
+            state.auth.login();
             return {
                 ...state,
                 isFetching: true,
@@ -19,7 +19,6 @@ const authReducer = (
             return {
                 ...state,
                 isFetching: false,
-                isAuthenticated: true
             };
         case types.LOGIN_ERROR:
             return {
@@ -27,14 +26,16 @@ const authReducer = (
                 isFetching: false,
                 error: action.error
             };
+        case types.LOGOUT_REQUEST:
+            state.auth.logout();
+            return {
+                ...state
+            }
         case types.LOGOUT_SUCCESS:
             return {
                 ...state,
-                isAuthenticated: false
             }
         default:
             return state;
     }
 };
-
-export default authReducer;
