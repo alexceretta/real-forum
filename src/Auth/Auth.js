@@ -11,7 +11,7 @@ export default class Auth {
       clientID: AUTH_CONFIG.clientId,
       redirectUri: AUTH_CONFIG.callbackUrl,
       responseType: 'token id_token',
-      scope: 'openid'
+      scope: 'openid profile'
     });
 
     this.login = this.login.bind(this);
@@ -56,7 +56,8 @@ export default class Auth {
   }
 
   userProfile() {
-    return window.localStorage.getItem('userProfile');
+    var profile = JSON.parse(window.localStorage.getItem('userProfile'));
+    return profile;
   }
 
   setAccessToken = (token) => {
@@ -72,7 +73,7 @@ export default class Auth {
   }
 
   setUserProfile = (profile) => {
-    window.localStorage.setItem('userProfile', profile);
+    window.localStorage.setItem('userProfile', JSON.stringify(profile));
   }
 
   setSession(authResult) {

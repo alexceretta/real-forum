@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
-import Header from '../Components/Header';
+import Header from '../Components/Header/Header';
 import ForumList from '../Components/ForumList';
 import ViewForum from '../Components/Board/ViewForum';
 import './App.css';

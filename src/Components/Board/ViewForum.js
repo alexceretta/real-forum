@@ -22,7 +22,9 @@ class ViewForum extends Component {
 
     threadRow() {
         return this.state.threads.map((thread, i) =>
-            <div className="row">
+            <div className={`row ${styles.thread}`}>
+                <div className="col">
+                </div>
                 <div className="col">
                     <div>
                         {thread.title}
@@ -52,9 +54,11 @@ class ViewForum extends Component {
 
     render() {
         return (
-            <div>
+            <div class={`container ${styles.threadList}`}>
+                <div className={`row ${styles.threadsHeader}`}>
+                </div>
                 {this.threadRow()}
-            </div>            
+            </div>
         )
     }
 }

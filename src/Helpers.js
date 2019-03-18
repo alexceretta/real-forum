@@ -1,10 +1,10 @@
 export function getElapsedTime(date) {
-    const fromDate = new Date(date);
+    const fromDate = new Date(date);    
     const _MS_PER_DAY = 1000 * 60 * 60 * 24;
     const currDate = new Date();
-    const currUtc = Date.UTC(currDate.getFullYear(), currDate.getMonth(), currDate.getDay());
-    const compareUtc = Date.UTC(fromDate.getFullYear(), fromDate.getMonth(), fromDate.getDay());
-    // Gets the difference in seconds
+    const currUtc = Date.UTC(currDate.getFullYear(), currDate.getMonth(), currDate.getDate(), currDate.getHours(), currDate.getUTCMinutes());    
+    const compareUtc = Date.UTC(fromDate.getFullYear(), fromDate.getMonth(), fromDate.getDate(), fromDate.getHours(), fromDate.getUTCMinutes());
+    // Gets the difference in seconds    
     const difference = ((currUtc - compareUtc) / 1000);
     // Special display if less than a minute ago
     if(difference < 60) {

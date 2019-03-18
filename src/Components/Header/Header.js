@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import { loginRequest, logoutRequest } from '../Actions';
+import { loginRequest, logoutRequest } from '../../Actions';
 import { bindActionCreators } from 'redux';
+
+import styles from './Header.module.css';
 
 class Header extends Component {
     
@@ -41,8 +43,8 @@ class Header extends Component {
                     }
                     { isAuthenticated && (
                         <ul className="navbar-nav">
-                            <li>
-                                {userProfile}
+                            <li className={styles.userBlock}>
+                                {userProfile.sub}
                             </li>
                             <li>
                                 <button type="button" onClick={this.logoutClick} className="btn btn-outline-danger my-2 my-sm-0" >Logout</button>
