@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { getElapsedTime } from '../../Helpers.js'
 import styles from './ViewForum.module.css';
+import { Link } from 'react-router-dom';
 
 class ViewForum extends Component {
 
     state = {
+        board: {},
         threads: []
     }
 
@@ -13,8 +15,8 @@ class ViewForum extends Component {
 
         axios.get(`http://127.0.0.1:8000/boards/${this.props.match.params.id}`)
         .then(res => {
-            const threads = res.data.threads;
-            this.setState({ threads });
+            const { threads, ...board } = res.data;
+            this.setState({ board, threads });
         }).catch(function(error) {
             console.log(error);
         });
@@ -22,23 +24,24 @@ class ViewForum extends Component {
 
     threadRow() {
         return this.state.threads.map((thread, i) =>
-            <div className={`row ${styles.thread}`}>
-                <div className="col">
+            <div className={`row ${styles.thread}`}>                
+                <div className="col-1 text-center">
+                    <img src={thread.user.avatar} className={styles.avatarPreview} alt="User Avatar" />
                 </div>
                 <div className="col">
-                    <div>
+                    <div class="row align-items-start">
                         {thread.title}
                     </div>
-                    <div>
+                    <div class="row align-items-end">
                         <small>
                             {thread.user.name} - {getElapsedTime(thread.creationDate)}
                         </small>
                     </div>
                 </div>
-                <div className="col">
+                <div className="col-1 col-md-2">
                     Posts: {thread.postCount}
                 </div>
-                <div className="col">
+                <div className="col-2 col-md-3">
                     <div>
                         {getElapsedTime(thread.updateDate)}
                     </div>
@@ -54,11 +57,22 @@ class ViewForum extends Component {
 
     render() {
         return (
-            <div class={`container ${styles.threadList}`}>
-                <div className={`row ${styles.threadsHeader}`}>
+            <div class={`container ${styles.forumContainer}`}>
+                <nav aria-label="breadcrumb">
+                    <ol className="breadcrumb">
+                        <li className="breadcrumb-item"><Link to={`/`} >Home</Link></li>
+                        <li className="breadcrumb-item active" aria-current="page">{this.state.board.name}</li>
+                    </ol>
+                </nav>
+                <div class="shadow p-3 bg-white rounded">
+                    <h3>{this.state.board.name}</h3>
+                    <p>{this.state.board.description}</p>
                 </div>
-                {this.threadRow()}
-            </div>
+                <div className={`shadow-sm rounded ${styles.threadList}`}>                
+                    <div className={`row ${styles.threadsHeader}`}></div>
+                    {this.threadRow()}
+                </div>
+            </div>            
         )
     }
 }

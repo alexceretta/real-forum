@@ -1,3 +1,7 @@
+.forumContainer {
+    margin-top: 20px;
+}
+
 .threadsHeader
 {
     height: 35px;
@@ -9,19 +13,26 @@
 }
 
 .threadList {
-    border-radius: 10px;
+    border-radius: 5px;
     border: 1px solid gray;
-    margin-top: 25px;
+    margin-top: 20px;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.threadList > div {
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
 .threadList > div:first-child {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 .threadList > div:last-child {
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .threadList > div:nth-child(odd) {
@@ -31,4 +42,15 @@
 .thread
 {
     padding: 10px;    
+}
+
+.avatarColumn
+{
+    min-width: 400px;
+}
+
+.avatarPreview
+{
+    width: 48px;
+    height: auto;
 }
