@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { loginRequest, logoutRequest } from '../../Actions';
 import { bindActionCreators } from 'redux';
+import { NavDropdown } from 'react-bootstrap';
 
 import styles from './Header.module.css';
 
@@ -27,15 +28,10 @@ class Header extends Component {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
-                        <li className="nav-item dropdown">
-                            <Link to={`/`} className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Fórums
-                            </Link>
-                            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <Link to={`/ViewForum/1`} className="dropdown-item">Joguinhos</Link>
-                                <Link to={`/ViewForum/2`} className="dropdown-item">Geral</Link>                  
-                            </div>
-                        </li>                        
+                        <NavDropdown title="Fóruns" id="forunsDropdown">
+                            <Link className="dropdown-item" to="/ViewForum/1" role="button">Games</Link>
+                            <Link className="dropdown-item" to="/ViewForum/2" role="button">Geral</Link>
+                        </NavDropdown>                                            
                     </ul>                    
                     { !isAuthenticated && (
                         <ul className="navbar-nav">
@@ -46,9 +42,9 @@ class Header extends Component {
                     }
                     { isAuthenticated && (
                         <ul className="navbar-nav">
-                            <li className={styles.userBlock}>
-                                {userProfile.sub}
-                            </li>
+                            <li class="nav-item">
+                                <Link to={"/Dashboard"} className="nav-link">{userProfile.name}</Link>
+                            </li>                            
                             <li>
                                 <button type="button" onClick={this.logoutClick} className="btn btn-outline-danger my-2 my-sm-0" >Logout</button>
                             </li>
@@ -62,7 +58,7 @@ class Header extends Component {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({ loginRequest, logoutRequest }, dispatch);
-}    
+}
 
 const mapStateToProps = (store) => ({
     auth: store.authState.auth

@@ -1,7 +1,3 @@
-.forumContainer {
-    margin-top: 20px;
-}
-
 .threadsHeader
 {
     height: 35px;
@@ -14,7 +10,7 @@
 
 .threadList {
     border-radius: 5px;
-    border: 1px solid gray;
+    border: 1px solid #ddd;
     margin-top: 20px;
     margin-left: -15px;
     margin-right: -15px;
