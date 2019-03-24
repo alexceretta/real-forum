@@ -57,7 +57,7 @@ class ViewForum extends Component {
 
     render() {
         return (
-            <div class={`container ${styles.forumContainer}`}>
+            <div className="container main">
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item"><Link to={`/`} >Home</Link></li>
@@ -68,7 +68,7 @@ class ViewForum extends Component {
                     <h3>{this.state.board.name}</h3>
                     <p>{this.state.board.description}</p>
                 </div>
-                <div className={`shadow-sm rounded ${styles.threadList}`}>                
+                <div className={`shadow-sm ${styles.threadList}`}>                
                     <div className={`row ${styles.threadsHeader}`}></div>
                     {this.threadRow()}
                 </div>
