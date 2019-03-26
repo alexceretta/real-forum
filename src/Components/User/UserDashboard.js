@@ -17,8 +17,6 @@ class UserDashboard extends Component {
 
     render() {
 
-        const userProfile = this.props.auth.userProfile();
-
         return (
             <div className="container main">
                 <nav aria-label="breadcrumb">
@@ -42,21 +40,31 @@ class UserDashboard extends Component {
                             </Nav>
                         </Col>
                         <Col sm={10} className={`shadow p-3 rounded ${styles.formContainer}`}>
-                            <Tab.Content>
-                                <Tab.Pane eventKey="first">
-                                    <div className="row">
-                                        <div className="col-3">
-                                            <AvatarUploader defaultImage="http://127.0.0.1:8000/media/avatars/avatar_2782.jpg" />
-                                        </div>
-                                        <div className="col">
-                                            
-                                        </div>
-                                    </div>                                    
-                                </Tab.Pane>
-                                <Tab.Pane eventKey="second">
-                                    <h2>Sistema</h2>
-                                </Tab.Pane>
-                            </Tab.Content>
+                            <form>
+                                <Tab.Content>
+                                    <Tab.Pane eventKey="first">
+                                        <div className="row">
+                                            <div className="col-3 align-self-center">
+                                                <AvatarUploader defaultImage="http://127.0.0.1:8000/media/avatars/avatar-placeholder_ZM3ZAzr.png" />
+                                            </div>
+                                            <div className="col">
+                                                <div className="form-group">
+                                                    <label for="txtName">Nome do Usuário</label>
+                                                    <input type="text" className="form-control" id="txtName" name="name" aria-describedby="userNameHelp" />
+                                                    <small id="userNameHelp" className="form-text text-muted">O Nome não poderá ser alterado após o cadastro!</small>
+                                                </div>
+                                                <div className="form-group">
+                                                    <label for="txtEmail">E-mail</label>
+                                                    <input type="email" className="form-control" id="txtEmail" readOnly value={this.props.auth.authProfile().name} />
+                                                </div>
+                                            </div>
+                                        </div>                                    
+                                    </Tab.Pane>
+                                    <Tab.Pane eventKey="second">
+                                        <h2>Sistema</h2>
+                                    </Tab.Pane>
+                                </Tab.Content>
+                            </form>
                         </Col>
                     </Row>
                 </Tab.Container>                    

@@ -1,9 +1,13 @@
 .avatarContainer {
-    width: 170px;
+    width: 100%;
+    
 }
 
 .avatarUpload {
+    width: 170px;
+    
     position: relative;
+    margin: 0 auto;
 }
 
 .avatarEdit {

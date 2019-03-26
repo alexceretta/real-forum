@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { loginRequest, logoutRequest } from '../../Actions';
 import { bindActionCreators } from 'redux';
-import { NavDropdown } from 'react-bootstrap';
+import { NavDropdown, Badge } from 'react-bootstrap';
 
 import styles from './Header.module.css';
 
@@ -18,7 +18,8 @@ class Header extends Component {
 
         const { loginRequest } = this.props;
         const isAuthenticated = this.props.auth.isAuthenticated();
-        const userProfile = this.props.auth.userProfile();
+        const isAuthenticatedApp = this.props.auth.isAuthenticatedApp();
+        const profile = this.props.auth.userProfile() || this.props.auth.authProfile();
 
         return (        
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -40,15 +41,26 @@ class Header extends Component {
                             </li>
                         </ul> )
                     }
-                    { isAuthenticated && (
+                    { isAuthenticatedApp ? 
+                    (
                         <ul className="navbar-nav">
-                            <li class="nav-item">
-                                <Link to={"/Dashboard"} className="nav-link">{userProfile.name}</Link>
+                            <li className="nav-item">
+                            <Link to={"/Dashboard"} className="btn btn-outline-info"> {profile.name}</Link>
                             </li>                            
-                            <li>
-                                <button type="button" onClick={this.logoutClick} className="btn btn-outline-danger my-2 my-sm-0" >Logout</button>
+                            <li className="nav-item">
+                                <button type="button" onClick={this.logoutClick} className={`btn btn-outline-danger my-2 my-sm-0 ${styles.btnLogout}`} >Logout</button>
                             </li>
-                        </ul> )
+                        </ul> 
+                    ) : isAuthenticated && (
+                        <ul className="navbar-nav">
+                            <li className="nav-item">
+                                <Link to={"/Dashboard"} className="btn btn-outline-warning"><Badge variant="danger">!</Badge> {profile.name}</Link>
+                            </li>                            
+                            <li className="nav-item">
+                                <button type="button" onClick={this.logoutClick} className={`btn btn-outline-danger my-2 my-sm-0 ${styles.btnLogout}`} >Logout</button>
+                            </li>
+                        </ul>
+                    )
                     }
                 </div>
             </nav>

@@ -21,9 +21,13 @@ const Callback = (props) => {
   const { auth } = props;
 
   auth.handleAuthentication().then(() => {
-    auth.getProfile().then(() => {
-      props.history.push('/');
-    })    
+    auth.getProfile().then((response, error) => {
+      if(response === "auth_ok") {
+        props.history.push('/');
+      } else {
+        props.history.push('/Dashboard');
+      }
+    })
   });
 
   return (
