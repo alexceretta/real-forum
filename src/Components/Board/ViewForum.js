@@ -6,53 +6,54 @@ import { Link } from 'react-router-dom';
 
 class ViewForum extends Component {
 
-    state = {
-        board: {},
-        threads: []
+    componentWillMount() {
+        this.props.fetchThreads(this.props.match.params.id);
     }
 
-    componentDidMount() {
+    // componentDidMount() {
+    //     console.log(this.props.match.params.id);
+    //     axios.get(`http://127.0.0.1:8000/boards/${this.props.match.params.id}`)
+    //     .then(res => {
+    //         const { threads, ...board } = res.data;
+    //         this.setState({ board, threads });
+    //     }).catch(function(error) {
+    //         console.log(error);
+    //     });
+    // }
 
-        axios.get(`http://127.0.0.1:8000/boards/${this.props.match.params.id}`)
-        .then(res => {
-            const { threads, ...board } = res.data;
-            this.setState({ board, threads });
-        }).catch(function(error) {
-            console.log(error);
+    renderThreads(threads) {
+        return threads.map((thread, i) => {
+            return (
+                <div className={`row ${styles.thread}`}>                
+                    <div className="col-1 text-center">
+                        <img src={thread.user.avatar} className={styles.avatarPreview} alt="User Avatar" />
+                    </div>
+                    <div className="col">
+                        <div class="row align-items-start">
+                            {thread.title}
+                        </div>
+                        <div class="row align-items-end">
+                            <small>
+                                {thread.user.name} - {getElapsedTime(thread.creationDate)}
+                            </small>
+                        </div>
+                    </div>
+                    <div className="col-1 col-md-2">
+                        Posts: {thread.postCount}
+                    </div>
+                    <div className="col-2 col-md-3">
+                        <div>
+                            {getElapsedTime(thread.updateDate)}
+                        </div>
+                        <div>
+                            <small>
+                                {thread.lastUser.name}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            );
         });
-    }
-
-    threadRow() {
-        return this.state.threads.map((thread, i) =>
-            <div className={`row ${styles.thread}`}>                
-                <div className="col-1 text-center">
-                    <img src={thread.user.avatar} className={styles.avatarPreview} alt="User Avatar" />
-                </div>
-                <div className="col">
-                    <div class="row align-items-start">
-                        {thread.title}
-                    </div>
-                    <div class="row align-items-end">
-                        <small>
-                            {thread.user.name} - {getElapsedTime(thread.creationDate)}
-                        </small>
-                    </div>
-                </div>
-                <div className="col-1 col-md-2">
-                    Posts: {thread.postCount}
-                </div>
-                <div className="col-2 col-md-3">
-                    <div>
-                        {getElapsedTime(thread.updateDate)}
-                    </div>
-                    <div>
-                        <small>
-                            {thread.lastUser.name}
-                        </small>
-                    </div>
-                </div>
-            </div>
-        );
     }
 
     render() {
@@ -70,7 +71,7 @@ class ViewForum extends Component {
                 </div>
                 <div className={`shadow-sm ${styles.threadList}`}>                
                     <div className={`row ${styles.threadsHeader}`}></div>
-                    {this.threadRow()}
+                    {/* {this.threadRow()} */}
                 </div>
             </div>            
         )

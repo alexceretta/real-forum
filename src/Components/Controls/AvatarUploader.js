@@ -22,11 +22,11 @@ class AvatarUploader extends Component {
 
     render() {
         return (
-            <div class={styles.avatarContainer}>
+            <div className={styles.avatarContainer}>
                 <div className={styles.avatarUpload}>
                     <div className={styles.avatarEdit}>
                         <input type="file" onChange={this.handleChange} accept=".png, .jpeg, .jpg" id="uploadButton" />
-                        <label for="uploadButton"><EditIcon className={styles.editIcon} /></label>
+                        <label htmlFor="uploadButton"><EditIcon className={styles.editIcon} /></label>
                     </div>
                     <div className={styles.avatarPreview}>                    
                         <img src={this.state.image} alt="Avatar do Usuário" />

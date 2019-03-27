@@ -17,6 +17,9 @@ class UserDashboard extends Component {
 
     render() {
 
+        const userProfile = this.props.auth.userProfile()
+        const authProfile = this.props.auth.authProfile()
+
         return (
             <div className="container main">
                 <nav aria-label="breadcrumb">
@@ -49,16 +52,31 @@ class UserDashboard extends Component {
                                             </div>
                                             <div className="col">
                                                 <div className="form-group">
-                                                    <label for="txtName">Nome do Usuário</label>
-                                                    <input type="text" className="form-control" id="txtName" name="name" aria-describedby="userNameHelp" />
+                                                    <label htmlFor="txtName">Nome do Usuário</label>
+                                                    <input type="text" className="form-control" id="txtName" name="name" aria-describedby="userNameHelp" value={userProfile.name} />
                                                     <small id="userNameHelp" className="form-text text-muted">O Nome não poderá ser alterado após o cadastro!</small>
                                                 </div>
                                                 <div className="form-group">
-                                                    <label for="txtEmail">E-mail</label>
-                                                    <input type="email" className="form-control" id="txtEmail" readOnly value={this.props.auth.authProfile().name} />
+                                                    <label htmlFor="txtEmail">E-mail</label>
+                                                    <input type="email" className="form-control" id="txtEmail" readOnly value={authProfile.name} />
                                                 </div>
                                             </div>
-                                        </div>                                    
+                                        </div>
+                                        <hr />
+                                        <div className="row">
+                                            <div className="col">
+                                                <div className="form-group">
+                                                    <label htmlFor="txtBirthDate">Data de Nascimento</label>
+                                                    <input type="text" className="form-control" id="txtBirthDate" name="birthDate" value={userProfile.birthDate} />
+                                                </div>
+                                            </div>                                            
+                                            <div className="col">
+                                                <div className="form-group">
+                                                    <label htmlFor="txtTitle">Título</label>
+                                                    <input type="text" className="form-control" id="txtTitle" name="title" value={userProfile.title} />
+                                                </div>
+                                            </div>
+                                        </div>                                 
                                     </Tab.Pane>
                                     <Tab.Pane eventKey="second">
                                         <h2>Sistema</h2>

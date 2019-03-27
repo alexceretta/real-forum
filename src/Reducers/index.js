@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import { authReducer } from './authReducer'
+import { authReducer } from './authReducer';
+import { boardReducer } from './boardReducer';
 
 export const Reducers = combineReducers({
-    authState: authReducer
+    authState: authReducer,
+    boardState: boardReducer,
 });
