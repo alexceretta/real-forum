@@ -1,22 +1,21 @@
 import { connect } from 'react-redux'
-import { fetchThreads, fetchThreadsSuccess, fetchThreadsError } from '../../Actions/board';
+import { fetchThreads } from '../../Actions/board';
 import ViewForum from './ViewForum';
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
     return {
-        board: state.boardState,
-        boardId: props.boardId
+        boardData: state.boardData,
+        loading: state.boardData.loading
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchThreads: (boardId) => {
-            dispatch(fetchThreads(boardId)).then((response) => {
-                !response.error ? dispatch(fetchThreadsSuccess(response.payload.data)) : dispatch(fetchThreadsError(response.payload.data));
-            });
+            console.log(boardId);
+            dispatch(fetchThreads(boardId));
         }
-    }
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ViewForum);

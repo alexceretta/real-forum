@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { getElapsedTime } from '../../Helpers.js'
 import styles from './ViewForum.module.css';
 import { Link } from 'react-router-dom';
@@ -10,17 +9,6 @@ class ViewForum extends Component {
         this.props.fetchThreads(this.props.match.params.id);
     }
 
-    // componentDidMount() {
-    //     console.log(this.props.match.params.id);
-    //     axios.get(`http://127.0.0.1:8000/boards/${this.props.match.params.id}`)
-    //     .then(res => {
-    //         const { threads, ...board } = res.data;
-    //         this.setState({ board, threads });
-    //     }).catch(function(error) {
-    //         console.log(error);
-    //     });
-    // }
-
     renderThreads(threads) {
         return threads.map((thread, i) => {
             return (
@@ -29,10 +17,10 @@ class ViewForum extends Component {
                         <img src={thread.user.avatar} className={styles.avatarPreview} alt="User Avatar" />
                     </div>
                     <div className="col">
-                        <div class="row align-items-start">
+                        <div className="row align-items-start">
                             {thread.title}
                         </div>
-                        <div class="row align-items-end">
+                        <div className="row align-items-end">
                             <small>
                                 {thread.user.name} - {getElapsedTime(thread.creationDate)}
                             </small>
@@ -57,24 +45,30 @@ class ViewForum extends Component {
     }
 
     render() {
-        return (
-            <div className="container main">
-                <nav aria-label="breadcrumb">
-                    <ol className="breadcrumb">
-                        <li className="breadcrumb-item"><Link to={`/`} >Home</Link></li>
-                        <li className="breadcrumb-item active" aria-current="page">{this.state.board.name}</li>
-                    </ol>
-                </nav>
-                <div class="shadow p-3 bg-white rounded">
-                    <h3>{this.state.board.name}</h3>
-                    <p>{this.state.board.description}</p>
-                </div>
-                <div className={`shadow-sm ${styles.threadList}`}>                
-                    <div className={`row ${styles.threadsHeader}`}></div>
-                    {/* {this.threadRow()} */}
-                </div>
-            </div>            
-        )
+        if(this.props.boardData && !this.props.boardData.loading) {
+            return (            
+                <div className="container main">
+                    <nav aria-label="breadcrumb">
+                        <ol className="breadcrumb">
+                            <li className="breadcrumb-item"><Link to={`/`} >Home</Link></li>
+                            <li className="breadcrumb-item active" aria-current="page">{this.props.board.name}</li>
+                        </ol>
+                    </nav>
+                    <div className="shadow p-3 bg-white rounded">
+                        <h3>{this.props.board.name}</h3>
+                        <p>{this.props.board.description}</p>
+                    </div>
+                    <div className={`shadow-sm ${styles.threadList}`}>                
+                        <div className={`row ${styles.threadsHeader}`}></div>
+                        {/* {this.threadRow()} */}
+                    </div>
+                </div>            
+            )
+        } else {
+            return (
+                <div>Loading</div>
+            )
+        }
     }
 }
 
