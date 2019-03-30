@@ -3,27 +3,29 @@ import axios from 'axios';
 
 const serviceUrl = 'http://127.0.0.1:8000';
 
-export const fetchThreads = (boardId) => {
+export const fetchBoard = (boardId) => {
     
     return (dispatch) => {
-        dispatch(BOARD_FETCH);
+    
+        dispatch({ type: BOARD_FETCH });
+
         axios.get(`${serviceUrl}/boards/${boardId}`).then(response => {
-            dispatch(fetchThreadsSuccess(response.data));
+            dispatch(fetchBoardSuccess(response.data));
         })
         .catch(error => {
-            dispatch(fetchThreadsError(error));
+            dispatch(fetchBoardError(error));
         });
     }
 }
   
-export function fetchThreadsSuccess(board) {
+export function fetchBoardSuccess(board) {
     return {
         type: BOARD_FETCH_SUCCESS,
         payload: board
     };
 }
 
-export function fetchThreadsError(error) {
+export function fetchBoardError(error) {
     return {
         type: BOARD_FETCH_ERROR,
         payload: error

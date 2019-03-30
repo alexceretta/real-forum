@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import Header from '../Components/Header/Header';
 import ForumList from '../Components/ForumList';
-import ViewForumContainer from '../Components/Board/ViewForumContainer';
+import ViewForumContainer from '../Containers/Board/ViewForumContainer';
 import UserDashboard from '../Components/User/UserDashboard';
 import './App.css';
 

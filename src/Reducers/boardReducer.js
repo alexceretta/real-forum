@@ -10,7 +10,6 @@ export default function boardReducer (state = initialState, action) {
         case BOARD_FETCH:
             return { ...state, boardData: { board: {}, error: null, loading: true } }
         case BOARD_FETCH_SUCCESS:
-            console.log(action.payload);
             return { ...state, boardData: { board: action.payload, error: null, loading: false } }
         case BOARD_FETCH_ERROR:
             error = action.payload || { message: action.payload.message };
