@@ -2,9 +2,9 @@ import { connect } from 'react-redux'
 import { fetchBoard } from '../../Actions/board';
 import ViewForum from '../../Components/Board/ViewForum';
 
-const mapStateToProps = (store) => {
+const mapStateToProps = (state) => {
     return {
-        boardData: store.boardState.boardData
+        boardData: state.boardState.boardData
     };
 }
 

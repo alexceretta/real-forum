@@ -1,7 +1,7 @@
 import { THREADS_FETCH, THREADS_FETCH_SUCCESS, THREADS_FETCH_ERROR } from '../Actions/types'
 
 const initialState = {
-    threadData: { threads: [], error: null, loading: false }
+    threadData: { threads: [], error: null, loading: true }
 }
 
 export default function threadReducer (state = initialState, action) {

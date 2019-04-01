@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import { Store } from './Store';
-import App from './Containers/App';
+import App from './Containers/App/App';
 import Callback from './Callback/Callback';
 
 import './index.css';

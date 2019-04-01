@@ -1,7 +1,7 @@
 import { BOARD_FETCH, BOARD_FETCH_SUCCESS, BOARD_FETCH_ERROR } from '../Actions/types'
 
 const initialState = {
-    boardData: { board: {}, error: null, loading: false }
+    boardData: { board: {}, error: null, loading: true }
 }
 
 export default function boardReducer (state = initialState, action) {

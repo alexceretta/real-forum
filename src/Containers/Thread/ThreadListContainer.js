@@ -2,10 +2,10 @@ import { connect } from 'react-redux'
 import { fetchThreads } from '../../Actions/thread';
 import ThreadList from '../../Components/Thread/ThreadList';
 
-const mapStateToProps = (store, ownProps) => {
+const mapStateToProps = (state, ownProps) => {
     return {
         boardId: ownProps.boardId,
-        threadData: store.threadState.threadData
+        threadData: state.threadState.threadData
     };
 }
 

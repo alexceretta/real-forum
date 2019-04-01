@@ -4,15 +4,14 @@ import styles from './ThreadList.module.css';
 
 class ThreadList extends Component {
 
-    componentWillMount() {
-        console.log(this.props);
+    componentDidMount() {
         this.props.fetchThreads(this.props.boardId);
     }
 
     renderThreads(threads) {
         return threads.map((thread, i) => {
             return (
-                <div className={`row ${styles.thread}`}>                
+                <div key={`thread_${i}`} className={`row ${styles.thread}`}>                
                     <div className="col-1 text-center">
                         <img src={thread.user.avatar} className={styles.avatarPreview} alt="User Avatar" />
                     </div>
@@ -48,16 +47,17 @@ class ThreadList extends Component {
 
         const { threads, loading } = this.props.threadData;
 
-        if(!loading) {
+        if(loading) {
+            return (
+                <div>Loading</div>
+            )
+            
+        } else {
             return (            
                 <div className={`shadow-sm ${styles.threadList}`}>                
                     <div className={`row ${styles.threadsHeader}`}></div>
                     {this.renderThreads(threads)}
                 </div>
-            )
-        } else {
-            return (
-                <div>Loading</div>
             )
         }
     }
