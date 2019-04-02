@@ -1,17 +1,40 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import { css } from '@emotion/core';
+import { GridLoader } from 'react-spinners';
 import { getElapsedTime } from '../../Helpers.js'
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+
 import styles from './ThreadList.module.css';
+
+const serviceUrl = 'http://127.0.0.1:8000';
+
+const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+`;
 
 class ThreadList extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            threads: [],
+            loading: true
+        };
+    }
+
     componentDidMount() {
-        this.props.fetchThreads(this.props.boardId);
+        axios.get(`${serviceUrl}/threads?board=${this.props.boardId}`).then(response => {
+            this.setState({ threads: response.data.results, loading: false });
+        });
     }
 
     renderThreads(threads) {
         return threads.map((thread, i) => {
             return (
-                <div key={`thread_${i}`} className={`row ${styles.thread}`}>                
+                <div key={`thread_${i}`} className={`row ${styles.thread}`}>
                     <div className="col-1 text-center">
                         <img src={thread.user.avatar} className={styles.avatarPreview} alt="User Avatar" />
                     </div>
@@ -45,21 +68,32 @@ class ThreadList extends Component {
 
     render() {
 
-        const { threads, loading } = this.props.threadData;
+        const { threads, loading } = this.state;
 
-        if(loading) {
-            return (
-                <div>Loading</div>
-            )
-            
-        } else {
-            return (            
-                <div className={`shadow-sm ${styles.threadList}`}>                
-                    <div className={`row ${styles.threadsHeader}`}></div>
-                    {this.renderThreads(threads)}
-                </div>
-            )
-        }
+        return (            
+            <div className={`shadow-sm ${styles.threadList}`}>                
+                <div className={`row ${styles.threadsHeader}`}></div>
+                <TransitionGroup>
+                    { !loading ? 
+                    (
+                        <CSSTransition timeout={500} classNames="item">
+                            <div>
+                                {this.renderThreads(threads)}
+                            </div>
+                        </CSSTransition>
+                    ) :
+                    (
+                        <div className={`row ${styles.thread}`}>
+                            <CSSTransition timeout={500} classNames="item">
+                                <div className="col text-center">                                
+                                    <GridLoader css={override} color={'#4A90E2'} loading={loading} />
+                                </div>                        
+                            </CSSTransition>
+                        </div>                                    
+                    )}
+                </TransitionGroup>
+            </div>
+        )
     }
 }
 

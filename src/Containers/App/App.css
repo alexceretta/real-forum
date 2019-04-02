@@ -8,6 +8,7 @@
 
 .route-wrapper > div {
   position: absolute;
+  width: 100%;
 }
 
 .App-logo {
