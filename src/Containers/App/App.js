@@ -5,7 +5,7 @@ import { spring, AnimatedSwitch } from 'react-router-transition';
 import Header from '../../Components/Header/Header';
 import ForumList from '../../Components/ForumList';
 import ViewForum from '../../Components/Board/ViewForum';
-import UserDashboard from '../../Components/User/UserDashboard';
+import UserDashboardContainer from '../../Containers/User/UserDashboardContainer';
 import './App.css';
 
 class App extends Component {
@@ -64,7 +64,7 @@ class App extends Component {
                     >
                         <Route exact path = "/" component = { ForumList } />
                         <Route path = "/ViewForum/:id" render={(props) => <ViewForum key={props.match.params.id} {...props} /> }/>
-                        <Route path = "/Dashboard" component = { UserDashboard } />
+                        <Route path = "/Dashboard" component = { UserDashboardContainer } />
                     </AnimatedSwitch>
                 </main>
             </div>        

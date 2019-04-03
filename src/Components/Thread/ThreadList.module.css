@@ -1,14 +1,9 @@
-.threadsHeader
-{
-    height: 35px;
-}
-
 .threadColumn small
 {
     float: left;
 }
 
-.threadList {
+.threadContainer {
     border-radius: 5px;
     border: 1px solid #ddd;
     margin-top: 20px;
@@ -16,12 +11,14 @@
     margin-right: -15px;
 }
 
-.threadList > div {
-    margin-left: 0px;
-    margin-right: 0px;
+.threadList > div, .threadsHeader {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
 }
 
-.threadList > div:first-child {
+.threadsHeader {
+    height: 35px;
+    background-color: #e0e0e0;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
@@ -31,7 +28,7 @@
     border-bottom-right-radius: 5px;
 }
 
-.threadList > div:nth-child(odd) {
+.threadList > div:nth-child(even) {
     background-color: #e0e0e0;
 }
 

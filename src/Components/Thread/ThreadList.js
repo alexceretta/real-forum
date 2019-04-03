@@ -32,6 +32,17 @@ class ThreadList extends Component {
     }
 
     renderThreads(threads) {
+
+        if(threads.length === 0) {
+            return (
+                <div className={`row ${styles.thread}`}>
+                    <div className="col text-center">
+                        Não há Tópicos neste fórum.
+                    </div>
+                </div>
+            )
+        }
+
         return threads.map((thread, i) => {
             return (
                 <div key={`thread_${i}`} className={`row ${styles.thread}`}>
@@ -71,13 +82,13 @@ class ThreadList extends Component {
         const { threads, loading } = this.state;
 
         return (            
-            <div className={`shadow-sm ${styles.threadList}`}>                
+            <div className={`shadow-sm ${styles.threadContainer}`}>                
                 <div className={`row ${styles.threadsHeader}`}></div>
                 <TransitionGroup>
                     { !loading ? 
                     (
                         <CSSTransition timeout={500} classNames="item">
-                            <div>
+                            <div class={styles.threadList}>
                                 {this.renderThreads(threads)}
                             </div>
                         </CSSTransition>
