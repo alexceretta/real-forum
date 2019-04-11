@@ -4,6 +4,7 @@ import { css } from '@emotion/core';
 import { GridLoader } from 'react-spinners';
 import { getElapsedTime } from '../../Helpers.js'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { Link } from 'react-router-dom';
 
 import styles from './ThreadList.module.css';
 
@@ -51,7 +52,7 @@ class ThreadList extends Component {
                     </div>
                     <div className="col">
                         <div className="row align-items-start">
-                            {thread.title}
+                            <Link to={`/ViewThread/${thread.id}`}>{thread.title}</Link>
                         </div>
                         <div className="row align-items-end">
                             <small>

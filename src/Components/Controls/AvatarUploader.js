@@ -8,7 +8,7 @@ class AvatarUploader extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            image: props.defaultImage
+            image: props.value || props.defaultImage
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -18,6 +18,8 @@ class AvatarUploader extends Component {
         this.setState({
             image: URL.createObjectURL(event.target.files[0])
         });
+
+        this.props.setFieldValue(this.props.name, event.target.files[0]);
     }
 
     render() {

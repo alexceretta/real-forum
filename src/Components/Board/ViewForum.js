@@ -51,7 +51,7 @@ class ViewForum extends Component {
                             </div>
                         </CSSTransition>
                     )}
-                </TransitionGroup>                
+                </TransitionGroup>
             </div>
         );
     }

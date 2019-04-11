@@ -3,7 +3,7 @@ import Auth from '../Auth/Auth'
 
 const initState = {
     auth: new Auth(),
-    isFetching: false
+    isLoading: true,
 }
 
 export const authReducer = (state = initState, action) => {
@@ -12,18 +12,18 @@ export const authReducer = (state = initState, action) => {
             state.auth.login();
             return {
                 ...state,
-                isFetching: true,
+                isLoading: true,
                 error: null
             };
         case types.LOGIN_SUCCESS:
             return {
                 ...state,
-                isFetching: false,
+                isLoading: false,
             };
         case types.LOGIN_ERROR:
             return {
                 ...state,
-                isFetching: false,
+                isLoading: false,
                 error: action.error
             };
         case types.LOGOUT_REQUEST:
@@ -34,6 +34,17 @@ export const authReducer = (state = initState, action) => {
         case types.LOGOUT_SUCCESS:
             return {
                 ...state,
+            }
+        case types.USER_UPDATE_REQUEST:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case types.USER_UPDATE_SUCCESS:
+            state.auth.setUserProfile(action.payload);
+            return {
+                ...state,
+                isLoading: false
             }
         default:
             return state;

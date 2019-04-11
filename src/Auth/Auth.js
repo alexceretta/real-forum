@@ -36,7 +36,6 @@ export default class Auth {
         return new Promise((resolve, reject) => {
             this.auth0.parseHash((err, authResult) => {
                 if (err) return reject(err);
-                console.log(authResult);
                 if (!authResult || !authResult.idToken) {
                     return reject(err);
                 }
@@ -151,7 +150,6 @@ export default class Auth {
         return new Promise((resolve, reject) => {
             this.auth0.client.userInfo(this.accessToken(), (err, profile) => {
                 if (err) return reject(err);
-                console.log(profile);
                 if (!profile) {
                     return reject(err);
                 }
