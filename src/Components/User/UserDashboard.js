@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { Tab, Nav, Row, Col } from 'react-bootstrap';
 import { Formik, Field, Form } from 'formik';
 
-import AvatarUploader from '../Controls/AvatarUploader'
+import AvatarUploader from '../Controls/AvatarUploader';
+import LoadingButton from '../Controls/LoadingButton';
 
 import styles from './UserDashboard.module.css';
 import avatarPlaceholder from '../../Content/images/avatar-placeholder.png';
@@ -24,7 +25,6 @@ class UserDashboard extends Component {
         data.append('birthDate', values.birthDate);
 
         if(values.avatar && values.avatar.name) {
-            console.log(values.avatar.name);
             data.append('avatar', values.avatar);
         }
 
@@ -81,9 +81,7 @@ class UserDashboard extends Component {
                         <h2>Sistema</h2>
                     </Tab.Pane>
                 </Tab.Content>
-                <button type="submit" disabled={isLoading}>
-                    Submit
-                </button>                                   
+                <LoadingButton caption="Atualizar Cadastro" loadingCaption="Atualizando Cadastro..." condition={isLoading} />                
             </Form>
         );
     }
@@ -102,8 +100,6 @@ class UserDashboard extends Component {
         };
 
         Object.assign(profile, userProfile);
-
-        console.log(profile);
 
         return (
             <div className="container main">

@@ -3,7 +3,8 @@ import UserDashboard from '../../Components/User/UserDashboard';
 import { userUpdate } from '../../Actions/user';
 
 const mapStateToProps = (store) => ({
-    auth: store.authState.auth
+    auth: store.authState.auth,
+    isLoading: store.authState.isLoading
 });
 
 const mapDispatchToProps = {

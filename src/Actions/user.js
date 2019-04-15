@@ -36,13 +36,8 @@ export const userUpdate = (userData, authProfile) => {
         let url = '';
         let method = '';
 
-        // Display the key/value pairs
-        for (var pair of userData.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]); 
-        }
-
         // If there's no user ID, it's a new user
-        if(!userData.get('id')) {
+        if(userData.get('id') === '0') {
             method = 'post';
             url = `${serviceUrl}/users`;
         } else {

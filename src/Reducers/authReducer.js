@@ -3,7 +3,7 @@ import Auth from '../Auth/Auth'
 
 const initState = {
     auth: new Auth(),
-    isLoading: true,
+    isLoading: false,
 }
 
 export const authReducer = (state = initState, action) => {
