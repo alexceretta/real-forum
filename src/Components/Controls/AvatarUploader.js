@@ -7,6 +7,9 @@ class AvatarUploader extends Component {
 
     constructor(props) {
         super(props);
+
+        console.log(props.value);
+
         this.state = {
             image: props.value || props.defaultImage
         };

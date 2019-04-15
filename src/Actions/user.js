@@ -16,24 +16,46 @@ export const userCreate = (userData, authProfile) => {
         };
 
         axios.post(`${serviceUrl}/users`, userData).then((response) => {
-                dispatch(userCreateSuccess(response.data));
-            })
-            .catch((error) => {
-                dispatch(userCreateError(error));
-            });
+            dispatch(userCreateSuccess(response.data));
+        })
+        .catch((error) => {
+            dispatch(userCreateError(error));
+        });
     };
 };
 
 export const userUpdate = (userData, authProfile) => {
+
     return (dispatch) => {
         dispatch({
             type: USER_UPDATE_REQUEST
         });
 
         userData.append('auth0Id', authProfile.sub);
-        const config = { headers: { 'Content-Type': 'application/x-www-form-urlencoded' }};
+        userData.append('email', authProfile.name);
+        let url = '';
+        let method = '';
 
-        axios.put(`${serviceUrl}/users/${userData.get('id')}`, userData, config).then((response) => {
+        // Display the key/value pairs
+        for (var pair of userData.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]); 
+        }
+
+        // If there's no user ID, it's a new user
+        if(!userData.get('id')) {
+            method = 'post';
+            url = `${serviceUrl}/users`;
+        } else {
+            method = 'put';
+            url = `${serviceUrl}/users/${userData.get('id')}`;
+        }
+
+        axios({
+            method: method,
+            url: url,
+            data: userData,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        }).then((response) => {
             dispatch(userUpdateSuccess(response.data));
         })
         .catch((error) => {

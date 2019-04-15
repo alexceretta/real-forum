@@ -6,10 +6,12 @@ import { Formik, Field, Form } from 'formik';
 import AvatarUploader from '../Controls/AvatarUploader'
 
 import styles from './UserDashboard.module.css';
+import avatarPlaceholder from '../../Content/images/avatar-placeholder.png';
+
 import PersonIcon from '@material-ui/icons/Person';
 import SettingsIcon from '@material-ui/icons/Settings';
 
-class UserDashboard extends Component {    
+class UserDashboard extends Component {
 
     handleSubmit = (values) => {
 
@@ -17,10 +19,11 @@ class UserDashboard extends Component {
         // Usign Form Data to handle image upload
         let data = new FormData();
         data.append('id', values.id);
+        data.append('name', values.name);
         data.append('title', values.title);
         data.append('birthDate', values.birthDate);
 
-        if(values.avatar.name) {
+        if(values.avatar && values.avatar.name) {
             console.log(values.avatar.name);
             data.append('avatar', values.avatar);
         }
@@ -38,15 +41,15 @@ class UserDashboard extends Component {
                     <Tab.Pane eventKey="first">
                         <div className="row">
                             <div className="col-3 align-self-center">
-                                <AvatarUploader defaultImage="http://127.0.0.1:8000/media/avatars/avatar-placeholder_ZM3ZAzr.png" 
+                                <AvatarUploader defaultImage={avatarPlaceholder} 
                                     name="avatar" setFieldValue={props.setFieldValue} value={props.values.avatar} />
                             </div>
                             <div className="col">
                                 <div className="form-group">
                                     <label htmlFor="txtName">Nome do Usuário</label>
-                                    <Field id="txtName" type="text" className="form-control" name="name" disabled={props.values.name} />
+                                    <Field id="txtName" type="text" className="form-control" name="name" disabled={props.values.id} />
                                     {
-                                        !props.values.name && (
+                                        !props.values.id && (
                                             <small id="userNameHelp" className="form-text text-muted">O Nome não poderá ser alterado após o cadastro!</small>
                                         )
                                     }
@@ -87,10 +90,18 @@ class UserDashboard extends Component {
 
     render() {
 
+        const authProfile = this.props.auth.authProfile();
+        const userProfile = this.props.auth.userProfile();
+
         const profile = { 
-            email: this.props.auth.authProfile().name, 
-            ...this.props.auth.userProfile() 
+            email: authProfile.name,
+            name: '',
+            birthDate: '',
+            title: '',
+            id: 0
         };
+
+        Object.assign(profile, userProfile);
 
         console.log(profile);
 
