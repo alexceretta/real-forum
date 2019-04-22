@@ -28,6 +28,7 @@ class ThreadList extends Component {
 
     componentDidMount() {
         axios.get(`${serviceUrl}/threads?board=${this.props.boardId}`).then(response => {
+            console.log(response.data.results);
             this.setState({ threads: response.data.results, loading: false });
         });
     }
@@ -48,7 +49,7 @@ class ThreadList extends Component {
             return (
                 <div key={`thread_${i}`} className={`row ${styles.thread}`}>
                     <div className="col-1 text-center">
-                        <img src={thread.user.avatar} className={styles.avatarPreview} alt="User Avatar" />
+                        <img src={thread.user_details.avatar} className={styles.avatarPreview} alt="User Avatar" />
                     </div>
                     <div className="col">
                         <div className="row align-items-start">
@@ -56,7 +57,7 @@ class ThreadList extends Component {
                         </div>
                         <div className="row align-items-end">
                             <small>
-                                {thread.user.name} - {getElapsedTime(thread.creationDate)}
+                                {thread.user_details.name} - {getElapsedTime(thread.creationDate)}
                             </small>
                         </div>
                     </div>

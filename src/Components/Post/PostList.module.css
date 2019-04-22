@@ -1,3 +1,57 @@
+.userInformation {
+    padding: 10px;
+    background-color: #fafafa;
+}
+
 .userAvatar {
-    width: 160px;
+    width: 100px;
+}
+
+.userName {
+    margin-top: 5px;
+}
+
+.post {
+    margin: 10px;
+    -webkit-box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.3);
+    box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.3);
+}
+
+.postTime {
+    margin-top: 10px;
+}
+
+.postSeparator {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.postArrow {
+	position: relative;
+	background: #ffffff;
+	border-left: 1px solid #dee2e6;
+}
+.postArrow:after, .postArrow:before {
+	right: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.postArrow:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-right-color: #ffffff;
+	border-width: 10px;
+	margin-top: -25px;
+}
+.postArrow:before {
+	border-color: rgba(250, 250, 250, 0);
+	border-right-color: #dee2e6;
+	border-width: 11px;
+	margin-top: -26px;
 }

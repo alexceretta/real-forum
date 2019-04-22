@@ -39,7 +39,7 @@ class ViewThread extends Component {
                     { !loading && (
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item"><Link to={`/`} >Home</Link></li>
-                            <li className="breadcrumb-item active"><Link to={`/ViewForum/${thread.board.id}`} >{thread.board.name}</Link></li>
+                            <li className="breadcrumb-item active"><Link to={`/ViewForum/${thread.board_details.id}`} >{thread.board_details.name}</Link></li>
                         </ol>
                     )}
                 </nav>

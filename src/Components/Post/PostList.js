@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { css } from '@emotion/core';
 import { GridLoader } from 'react-spinners';
-// import { getElapsedTime } from '../../Helpers.js'
+import { getElapsedTime } from '../../Helpers.js'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 import styles from './PostList.module.css';
+import avatarPlaceholder from '../../Content/images/avatar-placeholder.png';
 
 const serviceUrl = 'http://127.0.0.1:8000';
 
@@ -44,15 +46,34 @@ class PostList extends Component {
         }
 
         return posts.map((post, i) => {
+
+            const userAvatar = post.user_details.avatar || avatarPlaceholder;
+
             return (
-                <div key={`post_${i}`} className={`row shadow ${styles.post}`}>
-                    <div class="col-2">
-                        <div>
-                            <img src={post.user.avatar} alt="User Avatar" className={`rounded ${styles.userAvatar}`} />
-                        </div>                        
+                <div key={`post_${i}`} className={`row border ${styles.post}`}>
+                    <div className={`col-2 ${styles.userInformation}`}>
+                        <div className="d-flex justify-content-center">
+                            <img src={userAvatar} alt="User Avatar" className={`rounded ${styles.userAvatar}`} />
+                        </div>
+                        <div className={`d-flex justify-content-center ${styles.userName}`}>
+                            <Link to="/">{post.user_details.name}</Link>
+                        </div>
+                        <div className="d-flex justify-content-center text-muted">
+                            {post.user_details.title}
+                        </div>
                     </div>
-                    <div class="col">
-                        {post.message}
+                    <div className={`col ${styles.postArrow}`}>
+                        <div className="row">
+                            <div className={`col ${styles.postTime}`}>
+                                <span class="small font-weight-light text-muted">{getElapsedTime(post.creationDate)}</span>
+                            </div>
+                        </div>
+                        {/* <hr className={styles.postSeparator} /> */}
+                        <div className="row">
+                            <div className="col">
+                                {post.message}
+                            </div>
+                        </div>                        
                     </div>                    
                 </div>
             );

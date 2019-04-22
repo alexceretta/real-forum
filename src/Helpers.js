@@ -18,11 +18,11 @@ export function getElapsedTime(date) {
     const daysDiff = Math.floor((currUtc - compareUtc) / _MS_PER_DAY);
     // Special display if today
     if(daysDiff === 0) {
-        return `Hoje às ${fromDate.toLocaleTimeString()}`;
+        return `Hoje, às ${fromDate.toLocaleTimeString()}`;
     }
     // Special display if yesterday
     if(daysDiff === 1) {
-        return `Ontem às ${fromDate.toLocaleTimeString()}`;
+        return `Ontem, às ${fromDate.toLocaleTimeString()}`;
     }
     // If more than a day ago, just shows the date
     return `Em ${fromDate.toLocaleDateString()}`;
