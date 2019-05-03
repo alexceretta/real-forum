@@ -1,0 +1,10 @@
+.editor {
+    border: 1px solid lightgray;
+    border-top: 2px solid black;
+    border-radius: 4px;    
+}
+
+.editorBox {
+    min-height: 140px;
+    padding: 10px;
+}

@@ -90,7 +90,7 @@ class ThreadList extends Component {
                     { !loading ? 
                     (
                         <CSSTransition timeout={500} classNames="item">
-                            <div class={styles.threadList}>
+                            <div className={styles.threadList}>
                                 {this.renderThreads(threads)}
                             </div>
                         </CSSTransition>

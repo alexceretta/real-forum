@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import CreateIcon from '@material-ui/icons/Create';
 
 import axios from 'axios';
 
@@ -46,6 +47,20 @@ class ViewForum extends Component {
                                 <div className="shadow p-3 bg-white rounded">
                                     <h3>{board.name}</h3>
                                     <p>{board.description}</p>
+                                </div>
+                                <div className="row mt-3">
+                                    <div className="col d-flex justify-content-start">
+                                        <nav>
+                                            <ul className="pagination mb-0">
+                                                <li className="page-item active"><a className="page-link">1</a></li>
+                                                <li className="page-item"><a className="page-link">2</a></li>
+                                                <li className="page-item"><a className="page-link">3</a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                    <div className="col d-flex justify-content-end">                                        
+                                        <Link to={`/NewThread/${board.id}`} className="btn btn-success d-flex"><CreateIcon className="mr-1" /> Novo Tópico</Link>
+                                    </div>
                                 </div>
                                 <ThreadList boardId={board.id} />
                             </div>

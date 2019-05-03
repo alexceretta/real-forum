@@ -6,6 +6,7 @@ import Header from '../../Components/Header/Header';
 import ForumList from '../../Components/ForumList';
 import ViewForum from '../../Components/Board/ViewForum';
 import ViewThread from '../../Components/Thread/ViewThread';
+import NewThread from '../../Components/Thread/NewThread';
 import UserDashboardContainer from '../../Containers/User/UserDashboardContainer';
 import './App.css';
 
@@ -67,6 +68,7 @@ class App extends Component {
                         <Route path = "/ViewForum/:id" render={(props) => <ViewForum key={props.match.params.id} {...props} /> }/>
                         <Route path = "/ViewThread/:id" render={(props) => <ViewThread key={props.match.params.id} {...props} /> } />
                         <Route path = "/Dashboard" component = { UserDashboardContainer } />
+                        <Route path = "/NewThread/:boardId" component={NewThread} />
                     </AnimatedSwitch>
                 </main>
             </div>        
