@@ -10,12 +10,20 @@ export default class PostEditor extends Component {
         this.state = {
             editorState: EditorState.createEmpty()
         };
+
+        this.onEditorStateChange = this.onEditorStateChange.bind(this);
     }
 
     onEditorStateChange = (editorState) => {
         this.setState({
             editorState,
         });
+
+        this.props.onChange(this.editorValue());
+    }
+
+    editorValue() {
+        return this.state.editorState.getCurrentContent();
     }
 
     render() {

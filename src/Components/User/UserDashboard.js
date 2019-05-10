@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Tab, Nav, Row, Col } from 'react-bootstrap';
-import { Field, Form } from 'formik';
+import { Formik, Field, Form } from 'formik';
 
 import AvatarUploader from '../Controls/AvatarUploader';
 import LoadingButton from '../Controls/LoadingButton';
@@ -124,7 +124,7 @@ class UserDashboard extends Component {
                             </Nav>
                         </Col>
                         <Col sm={10} className={`shadow p-3 rounded ${styles.formContainer}`}>
-                            <r 
+                            <Formik
                                 initialValues={profile}
                                 onSubmit={this.handleSubmit}                        
                                 render={this.renderForm}
